@@ -21,13 +21,20 @@ func main() {
 		log.Fatal(err)
 	}
 
-	taskRepo := postgres.New(db)
+	repo := postgres.New(db)
 
-	tasks, err := taskRepo.GetAll()
+	tasks, err := repo.GetAllTasks()
 	if err != nil {
 		panic(err)
 	}
 	for _, t := range tasks {
 		fmt.Printf("%#v\n", t)
 	}
+
+	user, err := repo.GetUserByID(3)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%#v\n", user)
 }
